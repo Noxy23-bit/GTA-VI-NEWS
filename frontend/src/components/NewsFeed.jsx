@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useLang } from "@/i18n";
 import { fetchNews, generateArticle, seedNews } from "@/api";
 import NewsCard from "@/components/NewsCard";
+import AdSlot from "@/components/AdSlot";
 import { Search, Plus, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 
@@ -153,14 +154,26 @@ export default function NewsFeed() {
             </p>
           </div>
         ) : (
-          <div
-            data-testid="news-grid"
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-          >
-            {articles.map((a) => (
-              <NewsCard key={a.id} article={a} />
-            ))}
-          </div>
+          <>
+            <div
+              data-testid="news-grid"
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+            >
+              {articles.slice(0, 3).map((a) => (
+                <NewsCard key={a.id} article={a} />
+              ))}
+            </div>
+            {articles.length > 3 && (
+              <AdSlot position="in-feed" format="auto" minHeight={140} />
+            )}
+            {articles.length > 3 && (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {articles.slice(3).map((a) => (
+                  <NewsCard key={a.id} article={a} />
+                ))}
+              </div>
+            )}
+          </>
         )}
       </div>
     </section>

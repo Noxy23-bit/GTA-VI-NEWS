@@ -1,0 +1,5 @@
+# ads.txt for Google AdSense — uncomment and paste your line below after AdSense approval.
+# Get the exact line from: https://www.google.com/adsense/ → Sites → ads.txt
+#
+# Example:
+# google.com, pub-XXXXXXXXXXXXXXXX, DIRECT, f08c47fec0942fa0

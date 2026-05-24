@@ -37,6 +37,7 @@ User-confirmed scope (2026-02):
 - ✅ Newsletter subscribe with duplicate detection.
 - ✅ Weekly AI summary with refresh.
 - ✅ 100% backend + frontend tests passing (16/16 backend, all frontend flows verified).
+- ✅ Google AdSense integration (placeholder mode): `AdSlot` component, 4 strategic positions (top-banner, in-feed, article-mid, pre-footer), bilingual "PUBLICIDADE/ADVERTISEMENT" disclaimer, `ads.txt` template at `/app/frontend/public/ads.txt`. Activate by setting `REACT_APP_ADSENSE_CLIENT=ca-pub-XXXXX` and `REACT_APP_ADS_ENABLED=true` in `/app/frontend/.env`.
 
 ## Prioritized Backlog
 ### P1

@@ -5,6 +5,7 @@ import { fetchArticle, fetchTrending } from "@/api";
 import { ArrowLeft, Sparkles, Eye, Tag } from "lucide-react";
 import Comments from "@/components/Comments";
 import NewsCard from "@/components/NewsCard";
+import AdSlot from "@/components/AdSlot";
 
 const CAT_COLOR = {
   rumor: "#ff00ff",
@@ -160,6 +161,8 @@ export default function NewsDetailPage() {
             </div>
           </div>
         )}
+
+        <AdSlot position="article-mid" format="rectangle" minHeight={250} />
 
         <Comments articleId={article.id} />
       </article>
