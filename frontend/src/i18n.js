@@ -17,7 +17,7 @@ const translations = {
       hours: "Horas",
       mins: "Minutos",
       secs: "Segundos",
-      releaseLabel: "26 de Maio, 2026 · Rockstar Games",
+      releaseLabel: "19 de Novembro, 2026 · Rockstar Games",
     },
     weekly: {
       tag: "IA · RESUMO DA SEMANA",
@@ -94,7 +94,7 @@ const translations = {
       hours: "Hours",
       mins: "Minutes",
       secs: "Seconds",
-      releaseLabel: "May 26, 2026 · Rockstar Games",
+      releaseLabel: "November 19, 2026 · Rockstar Games",
     },
     weekly: {
       tag: "AI · WEEKLY RECAP",

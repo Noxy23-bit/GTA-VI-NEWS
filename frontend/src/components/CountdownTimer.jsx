@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useLang } from "@/i18n";
 
-const RELEASE_DATE = new Date("2026-05-26T00:00:00Z").getTime();
+const RELEASE_DATE = new Date("2026-11-19T00:00:00Z").getTime();
 
 function calc() {
   const now = Date.now();

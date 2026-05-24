@@ -4,7 +4,7 @@ const ITEMS = [
   "VICE CITY",
   "JASON & LUCIA",
   "ROCKSTAR GAMES",
-  "MAY 26 · 2026",
+  "NOV 19 · 2026",
   "AI TRACKER ONLINE",
   "LEAKS · RUMORS · OFFICIAL",
 ];
