@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useLang } from "@/i18n";
 import CountdownTimer from "@/components/CountdownTimer";
 import { ArrowDown, Sparkles } from "lucide-react";
@@ -13,6 +13,7 @@ export default function Hero() {
   const sunRef = useRef(null);
   const gridRef = useRef(null);
   const cursorRef = useRef(null);
+  const [isHover, setIsHover] = useState(false);
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -23,26 +24,36 @@ export default function Hero() {
     let targetY = 0.5;
     let currentX = 0.5;
     let currentY = 0.5;
+    let lastPointerTime = 0;
+    let idleT = 0;
 
-    const update = () => {
-      // smooth lerp toward target
-      currentX += (targetX - currentX) * 0.08;
-      currentY += (targetY - currentY) * 0.08;
+    const update = (now) => {
+      // idle floating drift when no pointer activity
+      const idleActive = now - lastPointerTime > 1500;
+      if (idleActive) {
+        idleT += 0.006;
+        targetX = 0.5 + Math.sin(idleT) * 0.25;
+        targetY = 0.5 + Math.cos(idleT * 0.8) * 0.18;
+      }
+
+      currentX += (targetX - currentX) * 0.07;
+      currentY += (targetY - currentY) * 0.07;
 
       const dx = currentX - 0.5; // -0.5 .. 0.5
       const dy = currentY - 0.5;
 
       if (bgRef.current) {
-        bgRef.current.style.transform = `translate3d(${dx * -28}px, ${dy * -18}px, 0) scale(1.08)`;
+        bgRef.current.style.transform = `translate3d(${dx * -60}px, ${dy * -40}px, 0) scale(1.12)`;
       }
       if (sunRef.current) {
-        sunRef.current.style.transform = `translate3d(calc(-50% + ${dx * 60}px), ${dy * 30}px, 0)`;
+        sunRef.current.style.transform = `translate3d(calc(-50% + ${dx * 140}px), ${dy * 60}px, 0)`;
       }
       if (gridRef.current) {
-        gridRef.current.style.transform = `translate3d(${dx * 18}px, ${dy * 12}px, 0)`;
+        gridRef.current.style.transform = `translate3d(${dx * 40}px, ${dy * 26}px, 0) perspective(800px) rotateX(${5 + dy * 6}deg)`;
       }
       if (cursorRef.current) {
-        cursorRef.current.style.transform = `translate3d(${currentX * 100}%, ${currentY * 100}%, 0) translate(-50%, -50%)`;
+        const rect = section.getBoundingClientRect();
+        cursorRef.current.style.transform = `translate3d(${currentX * rect.width - 220}px, ${currentY * rect.height - 220}px, 0)`;
       }
 
       rafId = requestAnimationFrame(update);
@@ -52,6 +63,7 @@ export default function Hero() {
       const rect = section.getBoundingClientRect();
       targetX = Math.min(1, Math.max(0, (clientX - rect.left) / rect.width));
       targetY = Math.min(1, Math.max(0, (clientY - rect.top) / rect.height));
+      lastPointerTime = performance.now();
     };
 
     const onMove = (e) => handlePoint(e.clientX, e.clientY);
@@ -59,24 +71,16 @@ export default function Hero() {
       const touch = e.touches && e.touches[0];
       if (touch) handlePoint(touch.clientX, touch.clientY);
     };
-    const onLeave = () => {
-      targetX = 0.5;
-      targetY = 0.5;
-    };
 
-    section.addEventListener("mousemove", onMove);
-    section.addEventListener("mouseleave", onLeave);
+    window.addEventListener("mousemove", onMove);
     section.addEventListener("touchmove", onTouch, { passive: true });
-    section.addEventListener("touchend", onLeave);
 
     rafId = requestAnimationFrame(update);
 
     return () => {
       cancelAnimationFrame(rafId);
-      section.removeEventListener("mousemove", onMove);
-      section.removeEventListener("mouseleave", onLeave);
+      window.removeEventListener("mousemove", onMove);
       section.removeEventListener("touchmove", onTouch);
-      section.removeEventListener("touchend", onLeave);
     };
   }, []);
 
@@ -84,39 +88,40 @@ export default function Hero() {
     <section
       ref={sectionRef}
       data-testid="hero-section"
-      className="relative overflow-hidden cursor-none-md"
+      className="relative overflow-hidden"
+      onMouseEnter={() => setIsHover(true)}
+      onMouseLeave={() => setIsHover(false)}
     >
       {/* Parallax background image */}
       <div
         ref={bgRef}
-        className="absolute inset-0 bg-cover bg-center will-change-transform"
-        style={{
-          backgroundImage: `url(${HERO_BG})`,
-          transition: "transform 0.05s linear",
-        }}
+        className="absolute inset-0 bg-cover bg-center will-change-transform pointer-events-none"
+        style={{ backgroundImage: `url(${HERO_BG})` }}
       />
       <div className="absolute inset-0 bg-gradient-to-b from-[#050510]/40 via-[#050510]/70 to-[#050510] pointer-events-none" />
 
-      {/* Retro grid (parallax) */}
+      {/* Retro grid (parallax + 3D tilt) */}
       <div
         ref={gridRef}
-        className="absolute inset-x-0 bottom-0 h-1/2 retro-grid opacity-60 pointer-events-none will-change-transform"
+        className="absolute inset-x-0 bottom-0 h-1/2 retro-grid opacity-70 pointer-events-none will-change-transform"
+        style={{ transformOrigin: "center bottom" }}
       />
 
       {/* Sun layer (parallax) */}
       <div
         ref={sunRef}
-        className="absolute left-1/2 -translate-x-1/2 bottom-0 w-[800px] h-[800px] hero-sun opacity-50 pointer-events-none will-change-transform"
+        className="absolute left-1/2 bottom-0 w-[800px] h-[800px] hero-sun opacity-60 pointer-events-none will-change-transform"
       />
 
       {/* Cursor glow */}
       <div
         ref={cursorRef}
-        className="absolute top-0 left-0 w-[420px] h-[420px] pointer-events-none mix-blend-screen hidden md:block"
+        className="absolute top-0 left-0 w-[440px] h-[440px] pointer-events-none mix-blend-screen transition-opacity duration-500"
         style={{
           background:
-            "radial-gradient(circle, rgba(0,255,255,0.35) 0%, rgba(255,0,255,0.18) 40%, transparent 70%)",
-          filter: "blur(20px)",
+            "radial-gradient(circle, rgba(0,255,255,0.55) 0%, rgba(255,0,255,0.28) 38%, transparent 70%)",
+          filter: "blur(22px)",
+          opacity: isHover ? 1 : 0.45,
         }}
       />
 
