@@ -1,0 +1,115 @@
+{
+  "theme": "dark",
+  "archetype": "7 (Electric & Neon)",
+  "vibe": "GTA Vice City Aesthetic, Retrowave, 80s Miami, Gritty Synthwave",
+  "typography": {
+    "fonts": {
+      "heading": "'Bungee', 'Audiowide', system-ui, sans-serif",
+      "body": "'Inter', sans-serif",
+      "accent_mono": "'Space Mono', monospace"
+    },
+    "scale": {
+      "h1": "text-5xl sm:text-6xl tracking-tighter uppercase",
+      "h2": "text-3xl sm:text-4xl tracking-tight uppercase",
+      "h3": "text-xl sm:text-2xl uppercase",
+      "body": "text-base leading-relaxed",
+      "small_label": "text-xs tracking-[0.2em] uppercase"
+    },
+    "rules": [
+      "Headlines MUST use tracking-tight or tracking-tighter.",
+      "Never use default 'Bold' for headers; rely on the natural weight of the display font.",
+      "Overlines and badges MUST be uppercase with wide spacing.",
+      "Apply subtle neon drop-shadow to main headings for the retrowave aesthetic."
+    ]
+  },
+  "colors": {
+    "background": {
+      "base": "#050510",
+      "surface": "#13131A",
+      "surface_glass": "rgba(19, 19, 26, 0.7)"
+    },
+    "brand": {
+      "primary": "#FF00FF",
+      "secondary": "#00FFFF",
+      "accent": "#FFB800"
+    },
+    "text": {
+      "primary": "#FFFFFF",
+      "secondary": "#A1A1AA",
+      "muted": "#71717A"
+    },
+    "rules": [
+      "Use neon pink (#FF00FF) and cyan (#00FFFF) for accents, glow effects, and interactive elements.",
+      "Text must maintain APCA contrast ratios.",
+      "Avoid large blocks of pure neon; use it as a 'tracing beam', border, or text glow.",
+      "Do NOT use pure #000000; stick to the deep void blue/black (#050510)."
+    ]
+  },
+  "surfaces_and_effects": {
+    "card": "backdrop-blur-xl bg-[#13131A]/70 border border-[#FF00FF]/30",
+    "card_hover": "hover:bg-[#13131A]/90 hover:border-[#00FFFF]/60 hover:shadow-[0_0_15px_rgba(0,255,255,0.4)] transition-all duration-300",
+    "glow_text": "drop-shadow-[0_0_8px_rgba(255,0,255,0.8)]",
+    "scanline_overlay": "repeating-linear-gradient(to bottom, transparent 0, transparent 2px, rgba(0,0,0,0.1) 2px, rgba(0,0,0,0.1) 4px)",
+    "glassmorphism": "backdrop-blur-2xl bg-[#050510]/80 border-b border-white/10"
+  },
+  "layout_and_spacing": {
+    "grid_strategy": "MODE A: The 'Tetris' Grid for Marketing sections (Hero), and MODE B: 'Control Room' for News Feeds",
+    "spacing_scale": "p-4, p-6, p-8, p-12, p-16",
+    "rules": [
+      "Mobile-first responsive grids. Start with grid-cols-1.",
+      "Generous padding inside containers with borders (minimum p-6) to prevent text collision.",
+      "Use subgrid or h-full where necessary for consistent heights across adjacent cards."
+    ]
+  },
+  "components_strategy": {
+    "buttons": "Custom HTML/Tailwind for primary CTAs: dark background, neon border, cyan or pink text, and outer glow on hover.",
+    "badges": "AI and Category badges should be pill-shaped, uppercase, space-mono, with a glowing 1px border. E.g., 'border-[#FF00FF] text-[#FF00FF]'.",
+    "navigation": "Sticky glassmorphism header (z-50) with PT-BR/EN language toggle and 'GTA 6' retrowave branding.",
+    "inputs": "Shadcn Input/Textarea customized with deep dark backgrounds and cyan focus rings.",
+    "countdown_timer": "Massive monospace numbers, cyan or pink glowing text, split into flex columns (Days, Hours, Mins, Secs).",
+    "ai_summary_section": "Distinct block with 'tracing beam' gradient borders, showing the AI 'Resumo da Semana'."
+  },
+  "media_and_assets": {
+    "image_handling": [
+      "Hero background MUST use overlay 'bg-black/60' or a heavy gradient 'bg-gradient-to-t from-[#050510] to-transparent' to ensure text readability.",
+      "News card images should have a subtle brightness/contrast filter on hover."
+    ],
+    "image_urls": {
+      "hero_background": {
+        "url": "https://static.prod-images.emergentagent.com/jobs/7678aca8-210f-471f-907f-f94592b20c3d/images/dcbfcc4a580c7e3d1a2c5c6b930df1e016d8f008d6199995727cb6fcd530d499.png",
+        "description": "Retrowave 80s Miami synthwave sunset - Use for main hero header"
+      },
+      "weekly_summary_bg": {
+        "url": "https://static.prod-images.emergentagent.com/jobs/7678aca8-210f-471f-907f-f94592b20c3d/images/a4b09a62ba02523bb0302e32b8d231693d0c60f12784c7a1be892f51248f0a7f.png",
+        "description": "Abstract retro 80s arcade neon grid - Use as background texture for the Weekly Summary/Newsletter section"
+      },
+      "news_placeholder_1": {
+        "url": "https://images.unsplash.com/photo-1533106497176-45ae19e68ba2?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA0MTJ8MHwxfHNlYXJjaHwxfHxtaWFtaSUyMG5lb24lMjBuaWdodCUyMHBhbG0lMjB0cmVlc3xlbnwwfHx8fDE3Nzk2MzE3NTJ8MA&ixlib=rb-4.1.0&q=85",
+        "description": "Miami street at night - Use for general/official news article thumbnails"
+      },
+      "news_placeholder_2": {
+        "url": "https://images.unsplash.com/photo-1770177267441-1d8dadda4feb?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxOTF8MHwxfHNlYXJjaHw0fHx2aWRlbyUyMGdhbWUlMjBjb250cm9sbGVyJTIwbmVvbnxlbnwwfHx8fDE3Nzk2MzE3NTJ8MA&ixlib=rb-4.1.0&q=85",
+        "description": "Glowing video game controller - Use for Leaks/Rumors article thumbnails"
+      }
+    }
+  },
+  "testing_attributes": {
+    "rule": "All interactive elements must include a data-testid attribute in kebab-case based on role.",
+    "examples": [
+      "data-testid='countdown-timer'",
+      "data-testid='language-toggle-pt'",
+      "data-testid='newsletter-submit-button'",
+      "data-testid='news-card-link'"
+    ]
+  },
+  "instructions_to_main_agent": [
+    "Strictly adhere to the dark theme with neon pink (#FF00FF) and cyan (#00FFFF) accents.",
+    "Implement language context or toggle for PT-BR (primary) and EN.",
+    "The countdown timer target date is May 26, 2026. Use JavaScript to compute and animate the timer.",
+    "For the 'AI Summary / Resumo da Semana' section, render a distinct UI block with a gradient border or AI badge to emphasize machine generation.",
+    "Use Lucide-react or Phosphor icons, sizing them appropriately to match the retro aesthetic.",
+    "Ensure the layout is highly responsive. The news feed grid should switch from 1 column on mobile to 3 or 4 columns on large screens.",
+    "Inject a global VHS/grain overlay if possible using a fixed div with pointer-events-none and a low opacity CSS noise texture.",
+    "Add 'data-testid' to ALL buttons, links, and forms."
+  ]
+}
